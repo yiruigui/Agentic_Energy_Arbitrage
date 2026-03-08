@@ -1,34 +1,39 @@
-import os
-import sys
-import time
-import datetime
-import pandas as pd
-from typing import List, Optional
+
 
 # --- 1. Path & Import Setup ---
 
+import os
+import sys
 
-# Get the absolute path of the current file (app.py)
-current_dir = os.path.dirname(os.path.abspath(__file__))
+# 1. Force pysqlite for CrewAI/Chroma compatibility
+try:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass
 
-# If your code is in /mount/src/repo/agentic_energy/agentic_energy/data_loader.py
-# We need to add /mount/src/repo/ so that 'import agentic_energy.data_loader' works.
-# AND we add /mount/src/repo/agentic_energy so 'import schemas' works.
+# 2. Path Injection
+# BASE is /mount/src/agentic_energy_arbitrage
+BASE = os.path.dirname(os.path.abspath(__file__)) 
 
-if current_dir not in sys.path:
-    sys.path.insert(0, current_dir)
+# Adding these levels ensures 'import agentic_energy.data_loader' 
+# AND 'import schemas' both work.
+paths = [
+    BASE,
+    os.path.join(BASE, "agentic_energy"),
+    os.path.join(BASE, "agentic_energy", "agentic_energy")
+]
 
-# Add the subdirectory if it exists
-sub_dir = os.path.join(current_dir, "agentic_energy")
-if os.path.exists(sub_dir) and sub_dir not in sys.path:
-    sys.path.insert(0, sub_dir)
-
-
-
-# Now Python can find 'agentic_energy.data_loader' AND 'schemas'
-
+for p in paths:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
 import streamlit as st
+import pandas as pd
+import datetime
+import time
+
 
 # Import directly (Absolute Imports) - Requires removing the "." in mcp_clients.py
 from schemas import (
