@@ -6,6 +6,7 @@ pysqlite3-binary
 mcp>=1.1.0
 agentics==0.2.2
 crewai==0.28.8
+crewai_tools==0.1.2
 langchain-google-genai==1.0.3
 python-dotenv
 cvxpy==1.4.2
