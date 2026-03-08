@@ -1,13 +1,13 @@
-# Fixed core for compatibility
-agentics==0.2.2
-pydantic==2.12.4
+# Fixed core for agentics 0.2.2 compatibility
 rich>=13.7.0,<14.0.0
+pydantic==2.12.4
+agentics==0.2.2
 
 # Synchronized CrewAI 
 crewai==1.5.0
 crewai_tools==1.5.0
 
-# Math & Optimization - THE FIX IS HERE
+# Math & Optimization - THE CRITICAL DOWNGRADE
 numpy==1.26.4
 pandas==2.2.2
 cvxpy==1.7.3
