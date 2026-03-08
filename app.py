@@ -2,15 +2,18 @@ import os
 import sys
 
 
+
+
 # STEP 1: MODIFY PATHS
 root_path = os.path.dirname(os.path.abspath(__file__))
 
-# ONLY add root and agentic_energy. 
-# REMOVE the "agentics" folder from this list.
-for path in [root_path, os.path.join(root_path, "agentic_energy")]:
+# We need to point to the DEEP folder where the code actually lives
+deep_path = os.path.join(root_path, "agentic_energy", "agentic_energy")
+
+for path in [root_path, deep_path]:
     if path not in sys.path:
         sys.path.insert(0, path)
-
+        
 # STEP 2: SQLITE FIX
 try:
     import pysqlite3
