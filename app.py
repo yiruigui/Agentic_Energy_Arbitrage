@@ -1,3 +1,4 @@
+
 import subprocess, sys
 
 def _install_agentics():
@@ -10,13 +11,7 @@ def _install_agentics():
         )
 
 _install_agentics()
-```
 
-And in `requirements.txt`, make sure `dspy`, `litellm`, and `openai` are explicitly listed at versions that satisfy agentics' actual runtime needs:
-```
-dspy>=3.0.3
-litellm>=1.64.0
-openai>=1.58.1
 
 # --- 1. Path & Import Setup ---
 
