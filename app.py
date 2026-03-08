@@ -1,27 +1,24 @@
 import sys
 import os
-
-# 1. Get the absolute path to the directory containing app.py
-root_path = os.path.dirname(os.path.abspath(__file__))
-
-# 2. Add the root to sys.path so 'import agentic_energy' works
-if root_path not in sys.path:
-    sys.path.insert(0, root_path)
-
-# 3. Specifically add the agentic_energy folder itself 
-# This helps if the code tries to import 'schemas' directly
-ae_path = os.path.join(root_path, "agentic_energy")
-if ae_path not in sys.path:
-    sys.path.insert(0, ae_path)
-    
-# agentic_energy_app/app.py
-
 import datetime
 from typing import List, Optional
 import time
 import pandas as pd
 import streamlit as st
 
+# --- PATH FIX: This MUST come before local imports ---
+# Get the directory where app.py lives (the root of your repo)
+root_path = os.path.dirname(os.path.abspath(__file__))
+
+# Add root to sys.path so 'import agentic_energy' works
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
+
+# This handles the specific structure of Streamlit Cloud containers
+if "/mount/src/agentic_energy_arbitrage" not in sys.path:
+    sys.path.append("/mount/src/agentic_energy_arbitrage")
+
+# Now we can safely import your local modules
 from agentic_energy.schemas import (
     BatteryParams,
     DayInputs,
@@ -41,10 +38,8 @@ from agentic_energy.mcp_clients import (
 )
 from agentic_energy.data_utils import run_forecast_step
 from agentic_energy.llm_intent import ChatIntent, classify_intent, answer_generic_qa
+# --- END OF IMPORTS AND PATH FIXES ---
 
-import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # ---------- Streamlit page config ----------
 
