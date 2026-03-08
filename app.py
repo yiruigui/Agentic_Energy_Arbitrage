@@ -51,11 +51,17 @@ from mcp_clients import (
     run_explanation_plot,
     run_reasoning_tool,
 )
-# This was the one failing:
-from data_loader import EnergyDataLoader # Or data_utils if that's the filename
-from data_utils import run_forecast_step
+# Import directly from the files in the injected path
+from data_utils import run_forecast_step 
 from llm_intent import ChatIntent, classify_intent, answer_generic_qa
 
+# If you specifically need a class from data_loader.py (ensure the file exists)
+try:
+    from data_loader import EnergyDataLoader
+except ImportError:
+    # Fallback if the logic is actually inside data_utils
+    from data_utils import EnergyDataLoader
+    
 # ---------- Streamlit page config ----------
 
 st.set_page_config(
