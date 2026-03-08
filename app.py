@@ -1,45 +1,30 @@
-import sys
 import os
-import datetime
-from typing import List, Optional
-import time
-import pandas as pd
-import streamlit as st
+import sys
 
-# --- PATH FIX: This MUST come before local imports ---
-# Get the directory where app.py lives (the root of your repo)
+# 1. Force the root directory into the path
 root_path = os.path.dirname(os.path.abspath(__file__))
-
-# Add root to sys.path so 'import agentic_energy' works
 if root_path not in sys.path:
     sys.path.insert(0, root_path)
 
-# This handles the specific structure of Streamlit Cloud containers
-if "/mount/src/agentic_energy_arbitrage" not in sys.path:
-    sys.path.append("/mount/src/agentic_energy_arbitrage")
+# 2. Add the sub-directory directly
+ae_path = os.path.join(root_path, "agentic_energy")
+if ae_path not in sys.path:
+    sys.path.insert(0, ae_path)
 
-# Now we can safely import your local modules
-from agentic_energy.schemas import (
-    BatteryParams,
-    DayInputs,
-    SolveRequest,
-    SolveResponse,
-    PlotResponse,
-)
+# 3. Handle SQLite fix for CrewAI
+try:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass
 
-from agentic_energy.mcp_clients import (
-    run_milp_solver,
-    run_heuristic,
-    run_rl_agent,
-    run_llm_agent,
-    run_schedule_animation,
-    run_explanation_plot,
-    run_reasoning_tool,
-)
-from agentic_energy.data_utils import run_forecast_step
-from agentic_energy.llm_intent import ChatIntent, classify_intent, answer_generic_qa
-# --- END OF IMPORTS AND PATH FIXES ---
-
+# Now attempt the import
+try:
+    from agentic_energy.schemas import BatteryParams, DayInputs, SolveRequest, SolveResponse, PlotResponse
+except ModuleNotFoundError:
+    # If the above fails, try importing directly from the subfolder
+    from schemas import BatteryParams, DayInputs, SolveRequest, SolveResponse, PlotResponse
 
 # ---------- Streamlit page config ----------
 
