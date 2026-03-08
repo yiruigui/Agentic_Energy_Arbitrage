@@ -4,6 +4,11 @@ import datetime
 import time
 from typing import List, Optional
 
+# Add the 'agentics' folder to the path as well
+agentics_path = os.path.join(root_path, "agentics")
+if agentics_path not in sys.path:
+    sys.path.insert(0, agentics_path)
+
 # 1. SQLITE FIX (Crucial for CrewAI)
 try:
     __import__('pysqlite3')
