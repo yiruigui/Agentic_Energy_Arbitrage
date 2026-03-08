@@ -8,21 +8,22 @@ from typing import List, Optional
 # --- 1. Path & Import Setup ---
 
 
-# 1. Get the directory containing app.py
-root = os.path.dirname(os.path.abspath(__file__))
+# Get the absolute path of the current file (app.py)
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# 2. Get the folder that contains the 'agentic_energy' package
-# If your structure is /project/agentic_energy/agentic_energy/..., 
-# we need the middle one.
-package_parent = os.path.join(root, "agentic_energy")
-inner_module = os.path.join(package_parent, "agentic_energy")
+# If your code is in /mount/src/repo/agentic_energy/agentic_energy/data_loader.py
+# We need to add /mount/src/repo/ so that 'import agentic_energy.data_loader' works.
+# AND we add /mount/src/repo/agentic_energy so 'import schemas' works.
 
-# 3. Add all levels to sys.path to satisfy both styles of imports
-paths_to_add = [root, package_parent, inner_module]
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
 
-for p in paths_to_add:
-    if p not in sys.path:
-        sys.path.insert(0, p)
+# Add the subdirectory if it exists
+sub_dir = os.path.join(current_dir, "agentic_energy")
+if os.path.exists(sub_dir) and sub_dir not in sys.path:
+    sys.path.insert(0, sub_dir)
+
+
 
 # Now Python can find 'agentic_energy.data_loader' AND 'schemas'
 
