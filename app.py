@@ -1,28 +1,29 @@
 import os
 import sys
+import time
+import datetime
+import pandas as pd
+from typing import List, Optional
 
+# --- 1. Path & Import Setup ---
+root = os.path.dirname(os.path.abspath(__file__))
+# The folder containing schemas.py and mcp_clients.py
+inner = os.path.join(root, "agentic_energy", "agentic_energy")
 
+if root not in sys.path:
+    sys.path.insert(0, root)
+if inner not in sys.path:
+    sys.path.insert(0, inner)
 
+import streamlit as st
 
-# STEP 1: PATHS
-root_path = os.path.dirname(os.path.abspath(__file__))
-# Point to the actual inner code folder
-inner_code_path = os.path.join(root_path, "agentic_energy", "agentic_energy")
-
-if root_path not in sys.path:
-    sys.path.insert(0, root_path)
-if inner_code_path not in sys.path:
-    sys.path.insert(0, inner_code_path)
-
-# STEP 4: CLEAN IMPORTS
-# Since we added the inner path to sys.path, you can import directly:
+# Import directly (Absolute Imports) - Requires removing the "." in mcp_clients.py
 from schemas import (
     BatteryParams,
     DayInputs,
     SolveRequest,
     SolveResponse,
     PlotResponse,
-    # ... other schemas
 )
 from mcp_clients import (
     run_milp_solver,
@@ -33,9 +34,10 @@ from mcp_clients import (
     run_explanation_plot,
     run_reasoning_tool,
 )
-# Clean imports (assuming the inner folder is in sys.path)
 from data_utils import run_forecast_step
 from llm_intent import ChatIntent, classify_intent, answer_generic_qa
+
+
 # ---------- Streamlit page config ----------
 
 st.set_page_config(
