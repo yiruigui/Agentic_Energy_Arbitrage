@@ -17,8 +17,8 @@ torch==2.4.1
 ray==2.50.0
 
 # 4. Infrastructure
-mcp==1.22.0
-python-dotenv==1.2.1
+mcp>=1.26.0
+python-dotenv>=1.1.1,<1.2
 streamlit
 pysqlite3-binary
 langchain-google-genai
