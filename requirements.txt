@@ -1,21 +1,26 @@
-# Fixed core for agentics + embedchain
+# 1. Hard-cap rich to stop embedchain/instructor from crashing
 rich>=13.7.0,<14.0.0
-pydantic==2.10.4
-agentics==0.2.2
 
-# Synchronized CrewAI (latest stable to avoid the 1.5.0 tools conflict)
+# 2. Sync the CrewAI family (0.102.0/0.17.0 is the most stable path)
 crewai==0.102.0
 crewai_tools==0.17.0
 langchain-google-genai
 
-# Math & Optimization
-cvxpy==1.7.3
-gurobipy
-numpy==1.26.4
-pandas==2.2.2
+# 3. Core Frameworks (Using your exact versions)
+agentics==0.2.2
+pydantic==2.12.4
 
-# Infrastructure
-mcp==1.2.0
-python-dotenv==1.0.1
+# 4. Math, RL & Optimization
+cvxpy==1.7.3
+gymnasium==1.1.1
+numpy==2.3.5
+pandas==2.3.3
+gurobipy
+torch==2.4.1
+ray==2.50.0
+
+# 5. Infrastructure
+mcp==1.22.0
+python-dotenv==1.2.1
 streamlit
 pysqlite3-binary
