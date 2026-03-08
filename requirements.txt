@@ -1,16 +1,14 @@
-# Hard-cap rich to satisfy embedchain/instructor
+# Fixed core for agentics + embedchain
 rich>=13.7.0,<14.0.0
-
-# Sync crewai versions (tools 1.5.0 needs crewai 1.5.0)
-crewai==1.5.0
-crewai_tools==1.5.0
-
-# Frameworks & Core
+pydantic==2.10.4
 agentics==0.2.2
-pydantic>=2.10.4
+
+# Synchronized CrewAI (latest stable to avoid the 1.5.0 tools conflict)
+crewai==0.102.0
+crewai_tools==0.17.0
 langchain-google-genai
 
-# Optimization & Math
+# Math & Optimization
 cvxpy==1.7.3
 gurobipy
 numpy==1.26.4
