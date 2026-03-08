@@ -4,9 +4,16 @@ import json
 from typing import List,Sequence, Optional
 
 
-# Change this: from mcp import StdioServerParameters
-# To this:
-from mcp import StdioServerParameters
+try:
+    # 1. Try the most recent official location (mcp 1.2.0+)
+    from mcp import StdioServerParameters
+except ImportError:
+    try:
+        # 2. Try the mid-beta location
+        from mcp.server.stdio import StdioServerParameters
+    except ImportError:
+        # 3. Try the legacy/types location
+        from mcp.types import StdioServerParameters
 
 from crewai_tools import MCPServerAdapter
 
