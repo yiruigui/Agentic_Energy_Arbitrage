@@ -1,13 +1,13 @@
-# Fixed core for agentics 0.2.2 compatibility
-rich>=13.7.0,<14.0.0
-pydantic==2.12.4
+# 1. Frameworks & Pydantic (Agentics 0.2.2 is the bottleneck)
 agentics==0.2.2
+pydantic==2.12.4
+rich>=13.7.0,<14.0.0
 
-# Synchronized CrewAI 
+# 2. Synchronized CrewAI (Syncing tools 1.5.0 with crewai 1.5.0)
 crewai==1.5.0
 crewai_tools==1.5.0
 
-# Math & Optimization - THE CRITICAL DOWNGRADE
+# 3. Math & RL - THE CRITICAL DOWNGRADE FOR AGENTICS
 numpy==1.26.4
 pandas==2.2.2
 cvxpy==1.7.3
@@ -16,7 +16,7 @@ gurobipy
 torch==2.4.1
 ray==2.50.0
 
-# Infrastructure
+# 4. Infrastructure
 mcp==1.22.0
 python-dotenv==1.2.1
 streamlit
