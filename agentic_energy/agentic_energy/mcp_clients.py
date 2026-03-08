@@ -3,7 +3,11 @@ import sys
 import json
 from typing import List,Sequence, Optional
 
-from mcp import StdioServerParameters
+
+# Change this: from mcp import StdioServerParameters
+# To this:
+from mcp.server.stdio import StdioServerParameters
+
 from crewai_tools import MCPServerAdapter
 
 from agentic_energy.schemas import (
