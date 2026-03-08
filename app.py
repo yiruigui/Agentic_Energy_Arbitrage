@@ -1,36 +1,29 @@
 import os
 import sys
-import datetime
-import time
-from typing import List, Optional
 
-# 1. SQLITE FIX (Crucial for CrewAI/Agentics)
+# STEP 1: MODIFY PATHS BEFORE ANY OTHER IMPORTS
+root_path = os.path.dirname(os.path.abspath(__file__))
+
+# Add paths at index 0 to ensure they override installed libraries
+for path in [root_path, os.path.join(root_path, "agentics"), os.path.join(root_path, "agentic_energy")]:
+    if path not in sys.path:
+        sys.path.insert(0, path)
+
+# STEP 2: SQLITE FIX
 try:
     import pysqlite3
     sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 except (ImportError, KeyError):
     pass
 
+# STEP 3: NOW DO STANDARD & THIRD-PARTY IMPORTS
+import datetime
+import time
+from typing import List, Optional
 import pandas as pd
 import streamlit as st
 
-# 2. DEFINE THE PATHS (Fixes the NameError)
-# We define root_path at the very top level so every line below can see it.
-root_path = os.path.dirname(os.path.abspath(__file__))
-
-if root_path not in sys.path:
-    sys.path.insert(0, root_path)
-
-# Add the sub-packages to the path
-ae_path = os.path.join(root_path, "agentic_energy")
-if ae_path not in sys.path:
-    sys.path.insert(0, ae_path)
-
-agentics_path = os.path.join(root_path, "agentics")
-if agentics_path not in sys.path:
-    sys.path.insert(0, agentics_path)
-
-# 3. LOCAL IMPORTS
+# STEP 4: NOW DO YOUR LOCAL IMPORTS
 from agentic_energy.schemas import (
     BatteryParams,
     DayInputs,
@@ -38,7 +31,7 @@ from agentic_energy.schemas import (
     SolveResponse,
     PlotResponse,
 )
-
+# ... etc
 from agentic_energy.mcp_clients import (
     run_milp_solver,
     run_heuristic,
