@@ -14,20 +14,19 @@ except ImportError:
     pass
 
 # 2. Path Injection
-# BASE is /mount/src/agentic_energy_arbitrage
+# 2. Path Injection
 BASE = os.path.dirname(os.path.abspath(__file__)) 
 
-# Adding these levels ensures 'import agentic_energy.data_loader' 
-# AND 'import schemas' both work.
 paths = [
     BASE,
     os.path.join(BASE, "agentic_energy"),
-    os.path.join(BASE, "agentic_energy", "agentic_energy")
+    os.path.join(BASE, "agentic_energy", "agentic_energy") # The nested core
 ]
 
 for p in paths:
     if p not in sys.path:
         sys.path.insert(0, p)
+
 
 import streamlit as st
 import pandas as pd
@@ -52,9 +51,10 @@ from mcp_clients import (
     run_explanation_plot,
     run_reasoning_tool,
 )
+# This was the one failing:
+from data_loader import EnergyDataLoader # Or data_utils if that's the filename
 from data_utils import run_forecast_step
 from llm_intent import ChatIntent, classify_intent, answer_generic_qa
-
 
 # ---------- Streamlit page config ----------
 
