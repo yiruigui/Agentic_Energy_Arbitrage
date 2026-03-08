@@ -6,7 +6,7 @@ from typing import List,Sequence, Optional
 
 # Change this: from mcp import StdioServerParameters
 # To this:
-from mcp.server.stdio import StdioServerParameters
+from mcp import StdioServerParameters
 
 from crewai_tools import MCPServerAdapter
 
