@@ -6,14 +6,26 @@ import pandas as pd
 from typing import List, Optional
 
 # --- 1. Path & Import Setup ---
-root = os.path.dirname(os.path.abspath(__file__))
-# The folder containing schemas.py and mcp_clients.py
-inner = os.path.join(root, "agentic_energy", "agentic_energy")
 
-if root not in sys.path:
-    sys.path.insert(0, root)
-if inner not in sys.path:
-    sys.path.insert(0, inner)
+
+# 1. Get the directory containing app.py
+root = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Get the folder that contains the 'agentic_energy' package
+# If your structure is /project/agentic_energy/agentic_energy/..., 
+# we need the middle one.
+package_parent = os.path.join(root, "agentic_energy")
+inner_module = os.path.join(package_parent, "agentic_energy")
+
+# 3. Add all levels to sys.path to satisfy both styles of imports
+paths_to_add = [root, package_parent, inner_module]
+
+for p in paths_to_add:
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
+# Now Python can find 'agentic_energy.data_loader' AND 'schemas'
+
 
 import streamlit as st
 
