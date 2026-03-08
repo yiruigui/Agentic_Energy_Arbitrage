@@ -1,6 +1,11 @@
+import sys
+import os
+
+# This tells the web server to look in the current folder for your modules
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
 # agentic_energy_app/app.py
 
-import os
 import datetime
 from typing import List, Optional
 import time
