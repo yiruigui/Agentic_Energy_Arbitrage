@@ -1,26 +1,14 @@
-# Core Frameworks
+rich==13.9.4
 agentics==0.2.2
+pydantic==2.10.4
 crewai==0.100.0
 crewai_tools==1.5.0
 langchain-google-genai
-
-# Optimization & Math
 cvxpy==1.7.3
 gurobipy
-numpy==1.26.4  # Recommended over 2.x for compatibility with older C-extensions
+numpy==1.26.4
 pandas==2.2.2
-
-# RL & AI
-gymnasium==1.1.1
-ray==2.40.0
-torch==2.4.1
-
-# Infrastructure & MCP
 mcp==1.2.0
-pydantic==2.10.0
 python-dotenv==1.0.1
 streamlit
 pysqlite3-binary
-
-# Dependency Fixes
-rich==13.9.4  # Prevents the 'instructor' and 'embedchain' crash
