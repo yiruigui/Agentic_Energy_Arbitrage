@@ -1,0 +1,33 @@
+# Core Agent & Energy Logic
+
+agentics==0.2.2
+
+crewai==0.100.1
+
+crewai_tools==1.5.0
+
+pydantic==2.12.4
+
+python-dotenv==1.2.1
+
+
+
+# Optimization & Data
+
+gurobipy
+
+cvxpy==1.7.3
+
+pandas==2.3.3
+
+numpy==2.3.5
+
+
+
+# Streamlit & Cloud Fixes
+
+streamlit
+
+langchain-google-genai
+
+pysqlite3-binary
