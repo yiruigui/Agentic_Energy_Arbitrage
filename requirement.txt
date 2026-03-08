@@ -1,0 +1,7 @@
+streamlit
+gurobipy
+crewai
+langchain-google-genai
+pysqlite3-binary
+pandas
+python-dotenv
