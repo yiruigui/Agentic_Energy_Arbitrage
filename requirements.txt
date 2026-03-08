@@ -6,7 +6,9 @@ pysqlite3-binary
 mcp>=1.1.0
 agentics==0.2.2
 crewai==0.28.8
-# Change from 0.1.2 or nothing to:
+# Replace rich with this specific version
+rich==13.9.4
+# Ensure crewai-tools has the hyphen
 crewai-tools>=1.10.1
 langchain-google-genai==1.0.3
 python-dotenv
