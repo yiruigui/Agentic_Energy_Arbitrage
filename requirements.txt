@@ -1,6 +1,5 @@
 # 1. Frameworks & Pydantic (Agentics 0.2.2 is the bottleneck)
 pydantic>=2.11.9,<2.12
-rich>=13.7.0,<14.0.0
 
 # 2. Synchronized CrewAI (Using 0.102.0 to avoid the json-repair lock in 1.5.0)
 crewai==1.10.1
