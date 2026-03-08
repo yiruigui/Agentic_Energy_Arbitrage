@@ -15,12 +15,19 @@ except ImportError:
         # 3. Try the legacy/types location
         from mcp.types import StdioServerParameters
 
+# A more robust "Super Shield" for MCPServerAdapter
 try:
     from crewai_tools import MCPServerAdapter
 except ImportError:
-    # Some versions store it here
-    from crewai_tools.adapters.mcp_adapter import MCPServerAdapter
-
+    try:
+        from crewai_tools.adapters.mcp_adapter import MCPServerAdapter
+    except (ImportError, ModuleNotFoundError):
+        # Fallback for older versions: Define a dummy class so the file doesn't crash
+        class MCPServerAdapter:
+            def __init__(self, *args, **kwargs):
+                pass
+        print("Warning: MCPServerAdapter not found in crewai_tools. Using dummy fallback.")
+        
 from agentic_energy.schemas import (
     BatteryParams,
     DayInputs,
