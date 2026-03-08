@@ -1,17 +1,18 @@
 import os
 import sys
+import streamlit as st
 
-# 1. Force the root directory into the path
+# 1. PATH FIX: This MUST happen first
 root_path = os.path.dirname(os.path.abspath(__file__))
 if root_path not in sys.path:
     sys.path.insert(0, root_path)
 
-# 2. Add the sub-directory directly
+# Add subfolder to path
 ae_path = os.path.join(root_path, "agentic_energy")
 if ae_path not in sys.path:
     sys.path.insert(0, ae_path)
 
-# 3. Handle SQLite fix for CrewAI
+# 2. SQLITE FIX: Required for CrewAI on Streamlit Cloud
 try:
     __import__('pysqlite3')
     import sys
@@ -19,12 +20,16 @@ try:
 except ImportError:
     pass
 
-# Now attempt the import
-try:
-    from agentic_energy.schemas import BatteryParams, DayInputs, SolveRequest, SolveResponse, PlotResponse
-except ModuleNotFoundError:
-    # If the above fails, try importing directly from the subfolder
-    from schemas import BatteryParams, DayInputs, SolveRequest, SolveResponse, PlotResponse
+# 3. LOCAL IMPORTS: Now they will work
+from agentic_energy.schemas import (
+    BatteryParams,
+    DayInputs,
+    SolveRequest,
+    SolveResponse,
+    PlotResponse,
+)
+
+# ... rest of your imports (mcp_clients, etc.)
 
 # ---------- Streamlit page config ----------
 
