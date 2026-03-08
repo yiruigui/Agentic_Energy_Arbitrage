@@ -1,26 +1,29 @@
 import os
 import sys
-import streamlit as st
+import datetime
+import time
+from typing import List, Optional
 
-# 1. PATH FIX: This MUST happen first
-root_path = os.path.dirname(os.path.abspath(__file__))
-if root_path not in sys.path:
-    sys.path.insert(0, root_path)
-
-# Add subfolder to path
-ae_path = os.path.join(root_path, "agentic_energy")
-if ae_path not in sys.path:
-    sys.path.insert(0, ae_path)
-
-# 2. SQLITE FIX: Required for CrewAI on Streamlit Cloud
+# 1. SQLITE FIX (Crucial for CrewAI)
 try:
     __import__('pysqlite3')
-    import sys
     sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 except ImportError:
     pass
 
-# 3. LOCAL IMPORTS: Now they will work
+import pandas as pd
+import streamlit as st
+
+# 2. PATH FIX
+root_path = os.path.dirname(os.path.abspath(__file__))
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
+
+ae_path = os.path.join(root_path, "agentic_energy")
+if ae_path not in sys.path:
+    sys.path.insert(0, ae_path)
+
+# 3. LOCAL IMPORTS
 from agentic_energy.schemas import (
     BatteryParams,
     DayInputs,
@@ -29,7 +32,17 @@ from agentic_energy.schemas import (
     PlotResponse,
 )
 
-# ... rest of your imports (mcp_clients, etc.)
+from agentic_energy.mcp_clients import (
+    run_milp_solver,
+    run_heuristic,
+    run_rl_agent,
+    run_llm_agent,
+    run_schedule_animation,
+    run_explanation_plot,
+    run_reasoning_tool,
+)
+from agentic_energy.data_utils import run_forecast_step
+from agentic_energy.llm_intent import ChatIntent, classify_intent, answer_generic_qa
 
 # ---------- Streamlit page config ----------
 
