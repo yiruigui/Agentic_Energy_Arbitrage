@@ -1,9 +1,19 @@
 import sys
 import os
 
-# This tells the web server to look in the current folder for your modules
-sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+# 1. Get the absolute path to the directory containing app.py
+root_path = os.path.dirname(os.path.abspath(__file__))
 
+# 2. Add the root to sys.path so 'import agentic_energy' works
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
+
+# 3. Specifically add the agentic_energy folder itself 
+# This helps if the code tries to import 'schemas' directly
+ae_path = os.path.join(root_path, "agentic_energy")
+if ae_path not in sys.path:
+    sys.path.insert(0, ae_path)
+    
 # agentic_energy_app/app.py
 
 import datetime
