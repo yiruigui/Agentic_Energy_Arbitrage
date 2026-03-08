@@ -27,10 +27,16 @@ except ImportError:
             def __init__(self, *args, **kwargs):
                 pass
         print("Warning: MCPServerAdapter not found in crewai_tools. Using dummy fallback.")
-        
-from agentic_energy.schemas import (
+
+
+# Change this:
+# from agentic_energy.schemas import BatteryParams
+
+# To this (The dot means "look in the same folder I am in"):
+from .schemas import (
     BatteryParams,
     DayInputs,
+    SolveRequest
     SolveRequest,
     SolveResponse,
     PlotRequest,
