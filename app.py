@@ -4,40 +4,27 @@ import sys
 
 
 
-# STEP 1: MODIFY PATHS
+# STEP 1: PATHS
 root_path = os.path.dirname(os.path.abspath(__file__))
+# Point to the actual inner code folder
+inner_code_path = os.path.join(root_path, "agentic_energy", "agentic_energy")
 
-# We need to point to the DEEP folder where the code actually lives
-deep_path = os.path.join(root_path, "agentic_energy", "agentic_energy")
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
+if inner_code_path not in sys.path:
+    sys.path.insert(0, inner_code_path)
 
-for path in [root_path, deep_path]:
-    if path not in sys.path:
-        sys.path.insert(0, path)
-        
-# STEP 2: SQLITE FIX
-try:
-    import pysqlite3
-    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-except (ImportError, KeyError):
-    pass
-
-# STEP 3: NOW DO STANDARD & THIRD-PARTY IMPORTS
-import datetime
-import time
-from typing import List, Optional
-import pandas as pd
-import streamlit as st
-
-# STEP 4: NOW DO YOUR LOCAL IMPORTS
-from agentic_energy.agentic_energy.schemas import (
+# STEP 4: CLEAN IMPORTS
+# Since we added the inner path to sys.path, you can import directly:
+from schemas import (
     BatteryParams,
     DayInputs,
     SolveRequest,
     SolveResponse,
     PlotResponse,
+    # ... other schemas
 )
-# ... etc
-from agentic_energy.agentic_energy.mcp_clients import (
+from mcp_clients import (
     run_milp_solver,
     run_heuristic,
     run_rl_agent,
@@ -46,8 +33,9 @@ from agentic_energy.agentic_energy.mcp_clients import (
     run_explanation_plot,
     run_reasoning_tool,
 )
-from agentic_energy.data_utils import run_forecast_step
-from agentic_energy.llm_intent import ChatIntent, classify_intent, answer_generic_qa
+# Clean imports (assuming the inner folder is in sys.path)
+from data_utils import run_forecast_step
+from llm_intent import ChatIntent, classify_intent, answer_generic_qa
 # ---------- Streamlit page config ----------
 
 st.set_page_config(
