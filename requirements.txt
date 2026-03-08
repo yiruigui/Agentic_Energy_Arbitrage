@@ -1,26 +1,24 @@
-# 1. Hard-cap rich to stop embedchain/instructor from crashing
-rich>=13.7.0,<14.0.0
-
-# 2. Sync the CrewAI family (0.102.0/0.17.0 is the most stable path)
-crewai==0.102.0
-crewai_tools==0.17.0
-langchain-google-genai
-
-# 3. Core Frameworks (Using your exact versions)
+# Fixed core for compatibility
 agentics==0.2.2
 pydantic==2.12.4
+rich>=13.7.0,<14.0.0
 
-# 4. Math, RL & Optimization
+# Synchronized CrewAI 
+crewai==1.5.0
+crewai_tools==1.5.0
+
+# Math & Optimization - THE FIX IS HERE
+numpy==1.26.4
+pandas==2.2.2
 cvxpy==1.7.3
 gymnasium==1.1.1
-numpy==2.3.5
-pandas==2.3.3
 gurobipy
 torch==2.4.1
 ray==2.50.0
 
-# 5. Infrastructure
+# Infrastructure
 mcp==1.22.0
 python-dotenv==1.2.1
 streamlit
 pysqlite3-binary
+langchain-google-genai
