@@ -5,11 +5,11 @@ gurobipy==11.0.1
 pysqlite3-binary
 mcp>=1.1.0
 agentics==0.2.2
-crewai==0.28.8
-# Replace rich with this specific version
-rich==13.9.4
-# Ensure crewai-tools has the hyphen
-crewai-tools>=1.10.1
+# Loosen these two so pip can find a pair that matches
+crewai>=0.28.8
+crewai-tools>=1.0.0
+# Fix the rich conflict
+rich>=13.7.0,<14.0.0
 langchain-google-genai==1.0.3
 python-dotenv
 cvxpy==1.4.2
