@@ -1,11 +1,13 @@
 import os
 import sys
 
-# STEP 1: MODIFY PATHS BEFORE ANY OTHER IMPORTS
+
+# STEP 1: MODIFY PATHS
 root_path = os.path.dirname(os.path.abspath(__file__))
 
-# Add paths at index 0 to ensure they override installed libraries
-for path in [root_path, os.path.join(root_path, "agentics"), os.path.join(root_path, "agentic_energy")]:
+# ONLY add root and agentic_energy. 
+# REMOVE the "agentics" folder from this list.
+for path in [root_path, os.path.join(root_path, "agentic_energy")]:
     if path not in sys.path:
         sys.path.insert(0, path)
 
