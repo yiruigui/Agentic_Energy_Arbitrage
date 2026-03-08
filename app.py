@@ -1,5 +1,3 @@
-
-
 # --- 1. Path & Import Setup ---
 
 import os
@@ -13,25 +11,26 @@ try:
 except ImportError:
     pass
 
-# 2. Path Injection
-# 2. Path Injection
+# 2. Refined Path Injection
 BASE = os.path.dirname(os.path.abspath(__file__)) 
 
-paths = [
-    BASE,
-    os.path.join(BASE, "agentic_energy"),
-    os.path.join(BASE, "agentic_energy", "agentic_energy") # The nested core
-]
+# This targets /mount/src/agentic_energy_arbitrage/agentic_energy/agentic_energy/
+CORE_PATH = os.path.join(BASE, "agentic_energy", "agentic_energy")
 
-for p in paths:
-    if p not in sys.path:
-        sys.path.insert(0, p)
+# We insert it at index 0 to make it the FIRST place Python looks
+if CORE_PATH not in sys.path:
+    sys.path.insert(0, CORE_PATH)
 
+# Also keep the middle folder just in case
+MID_PATH = os.path.join(BASE, "agentic_energy")
+if MID_PATH not in sys.path:
+    sys.path.insert(0, MID_PATH)
 
 import streamlit as st
 import pandas as pd
 import datetime
 import time
+
 
 
 # Import directly (Absolute Imports) - Requires removing the "." in mcp_clients.py
