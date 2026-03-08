@@ -32,8 +32,8 @@ except ImportError:
 # Change this:
 # from agentic_energy.schemas import BatteryParams
 
-# To this (The dot means "look in the same folder I am in"):
-from .schemas import (
+# Remove the dot! Import directly from the filename
+from schemas import (
     BatteryParams,
     DayInputs,
     SolveRequest,
