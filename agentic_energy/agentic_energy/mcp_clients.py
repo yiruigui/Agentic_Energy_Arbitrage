@@ -36,7 +36,6 @@ except ImportError:
 from .schemas import (
     BatteryParams,
     DayInputs,
-    SolveRequest
     SolveRequest,
     SolveResponse,
     PlotRequest,
