@@ -29,7 +29,7 @@ import pandas as pd
 import streamlit as st
 
 # STEP 4: NOW DO YOUR LOCAL IMPORTS
-from agentic_energy.schemas import (
+from agentic_energy.agentic_energy.schemas import (
     BatteryParams,
     DayInputs,
     SolveRequest,
@@ -37,7 +37,7 @@ from agentic_energy.schemas import (
     PlotResponse,
 )
 # ... etc
-from agentic_energy.mcp_clients import (
+from agentic_energy.agentic_energy.mcp_clients import (
     run_milp_solver,
     run_heuristic,
     run_rl_agent,
