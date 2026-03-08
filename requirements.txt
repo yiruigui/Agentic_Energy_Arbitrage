@@ -1,4 +1,11 @@
 streamlit
 pandas
-agentics==0.2.2
+numpy
 gurobipy
+crewai
+crewai_tools
+langchain-google-genai
+python-dotenv
+mcp>=1.0.0
+pysqlite3-binary
+cvxpy
