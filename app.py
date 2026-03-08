@@ -1,14 +1,18 @@
-
 import subprocess, sys
 
 def _install_agentics():
     try:
         import agentics
     except ImportError:
-        subprocess.run(
-            [sys.executable, "-m", "pip", "install", "agentics==0.2.2", "--no-deps", "--quiet"],
-            check=True
+        result = subprocess.run(
+            [sys.executable, "-m", "pip", "install", "agentics==0.2.2", "--no-deps"],
+            capture_output=True,
+            text=True
         )
+        print("STDOUT:", result.stdout)
+        print("STDERR:", result.stderr)
+        if result.returncode != 0:
+            raise RuntimeError(f"Failed to install agentics:\n{result.stderr}")
 
 _install_agentics()
 
