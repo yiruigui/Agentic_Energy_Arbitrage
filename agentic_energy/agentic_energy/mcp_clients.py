@@ -15,7 +15,11 @@ except ImportError:
         # 3. Try the legacy/types location
         from mcp.types import StdioServerParameters
 
-from crewai_tools import MCPServerAdapter
+try:
+    from crewai_tools import MCPServerAdapter
+except ImportError:
+    # Some versions store it here
+    from crewai_tools.adapters.mcp_adapter import MCPServerAdapter
 
 from agentic_energy.schemas import (
     BatteryParams,
